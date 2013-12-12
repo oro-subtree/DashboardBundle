@@ -1,0 +1,37 @@
+{% set widgetId = app.request.get('_wid') %}
+{% set widgetContentId = 'widget-content-' ~ widgetId %}
+{% set widgetType = widgetType|default('dashboard') %}
+<div id="{{ widgetContentId }}" class="widget-content {{ widgetType }}-widget-content {{ widgetName }}'-widget-content">
+    {% block content %}
+    {% endblock %}
+    <div class="widget-actions">
+        {% block actions %}
+            {% if actions is defined %}
+                {% for action in actions -%}
+                    <a class="btn btn-mini {{ action.class|default('btn-primary') }}" href="{{ action.url }}">{% if action.icon is defined %}<i class="icon-{{ action.icon }}"></i> {% endif %}{{ action.label }}</a>
+                {%- endfor %}
+            {% endif %}
+        {% endblock %}
+    </div>
+    <script type="text/javascript">
+        require(['jquery', 'underscore', 'oro/widget-manager', 'oro/navigation'],
+        function($, _, widgetManager, Navigation){
+            widgetManager.getWidgetInstance({{ widgetId|json_encode|raw }}, function(widget) {
+                {% if widgetTitle is defined %}
+                widget.setTitle({{ widgetTitle|json_encode|raw }});
+                {% endif %}
+                widget.on('renderStart', function(el) {
+                    var navigation = Navigation.getInstance();
+                    if (navigation) {
+                        var actions = widget.getActions();
+                        if (!_.isUndefined(actions.adopted)) {
+                            _.each(actions.adopted, function (action) {
+                                navigation.processClicks(action);
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</div>
