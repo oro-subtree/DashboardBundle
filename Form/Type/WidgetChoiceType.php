@@ -4,9 +4,9 @@ namespace Oro\Bundle\DashboardBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 
-class WidgetPreviousDateRangeType extends AbstractType
+class WidgetChoiceType extends AbstractType
 {
-    const NAME = 'oro_type_widget_previous_date_range';
+    const NAME = 'oro_type_widget_choice';
 
     /**
      * {@inheritdoc}
@@ -29,6 +29,6 @@ class WidgetPreviousDateRangeType extends AbstractType
      */
     public function getParent()
     {
-        return 'checkbox';
+        return 'choice';
     }
 }
