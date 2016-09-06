@@ -1,4 +1,4 @@
-datagrids:
+datagrid:
     dashboards-grid:
         acl_resource: oro_dashboard_view
         source:
