@@ -1,4 +1,4 @@
-oro_dashboard_config:
+dashboards:
     widgets_configuration:
         title:
             type: oro_type_widget_title
