@@ -14,7 +14,7 @@ class FeatureConfigurationExtension implements ConfigurationExtensionInterface
     public function extendConfigurationTree(NodeBuilder $node)
     {
         $node
-            ->arrayNode('dashboards')
+            ->arrayNode('dashboard_widgets')
                 ->prototype('variable')
                 ->end()
             ->end();
